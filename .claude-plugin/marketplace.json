@@ -1,0 +1,12 @@
+{
+  "name": "learn-build-rtr-g2",
+  "description": "Skills from the RTR-G2 project for building Laravel + Vue apps",
+  "owner": { "name": "idgg22026" },
+  "plugins": [
+    {
+      "name": "rtr-fullstack-builder",
+      "source": "./plugin",
+      "description": "Plan, scaffold and grow Laravel 13 + Vue 3 + Docker apps with the RTR structure and rules."
+    }
+  ]
+}

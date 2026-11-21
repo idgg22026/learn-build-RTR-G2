@@ -65,7 +65,7 @@ printf ".env\n" > .gitignore
 
 ## Practice
 Write a one-page `PLAN.md` for **your own** idea (e.g. a gym or a school fee manager): the problem, a role table,
-and a module table like the ones above. You will reuse this plan with the skill in `skills/`.
+and a module table like the ones above. You will reuse this plan with the plugin in `plugin/` (see the README, *Add the skill to Claude*).
 
 ## Commit
 ```bash

@@ -145,4 +145,4 @@ git add . && git commit -m "Step 20: feature tests, demo command, CI and backups
 
 ---
 🎉 **You finished.** Next: read [`../GUIDELINE.md`](../GUIDELINE.md) for the main points, then use the skill in
-[`../skills/`](../skills/) to start your next project with the same structure.
+the Claude plugin in [`../plugin/`](../plugin/) (`/rtr-fullstack-builder:new-project`) to start your next project with the same structure.

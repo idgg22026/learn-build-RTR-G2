@@ -19,6 +19,18 @@ Ask for, or write together with the user, a `PLAN.md` with:
 
 Do not start Phase 1 until the roles and modules tables exist.
 
+## Fast path: scripts in this skill (use them first)
+
+- `scripts/new-project.sh <folder> "<App Name>" [--create]` creates the Docker files, a root `.env` with random DB
+  passwords, `.gitignore`, CI and a `PLAN.md` template. `--create` also creates `laravel-app/` and `vuejs-app/`
+  with Docker.
+- `scripts/make-module.sh <Thing> [plural] [Label]`, run from the project root, writes the 11 files of a CRUD module
+  from the templates (never overwriting) and prints the routes, router entry and menu item to add by hand.
+  Tested: a generated module passes its 3 feature tests, and the Vue page builds.
+
+Run them with `bash <this skill's base directory>/scripts/...`. If the plugin is installed, the user can also
+type `/rtr-fullstack-builder:new-project`, `/rtr-fullstack-builder:add-module` or `/rtr-fullstack-builder:check-rules`.
+
 ## Phase 1: Skeleton
 
 Copy `templates/docker/` to the project root (`compose.yaml`, `docker/laravel/Dockerfile`, `docker/vuejs/Dockerfile`).

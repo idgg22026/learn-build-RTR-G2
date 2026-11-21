@@ -1,0 +1,10 @@
+{
+  "name": "rtr-fullstack-builder",
+  "version": "1.0.0",
+  "description": "Build Laravel 13 + Vue 3 + Docker business apps the RTR Room way: plan, scaffold, generate CRUD modules, and check the rules.",
+  "author": { "name": "idgg22026" },
+  "homepage": "https://github.com/idgg22026/learn-build-RTR-G2",
+  "repository": "https://github.com/idgg22026/learn-build-RTR-G2",
+  "license": "MIT",
+  "keywords": ["laravel", "vue", "docker", "sanctum", "adminlte", "crud", "scaffold"]
+}

@@ -19,7 +19,8 @@ Dockerised full-stack app.
 | [steps/](steps/) | **The 20 lessons.** Do them in order. |
 | [GUIDELINE.md](GUIDELINE.md) | The project analysed module by module: architecture, rules, and the main points to copy into your own projects |
 | [figma/](figma/) | The Figma UX/UI file (design system + screens) and a script to finish the prototype |
-| [skills/fullstack-laravel-vue-builder/](skills/fullstack-laravel-vue-builder/) | A Claude Code **skill** made from this project, so you (or Claude) can start the next project the same way |
+| [plugin/](plugin/) | **Claude plugin `rtr-fullstack-builder`**: 4 skills and generator scripts to build your next project the same way ([how to install](#add-the-skill-to-claude)) |
+| [dist/fullstack-laravel-vue-builder.zip](dist/fullstack-laravel-vue-builder.zip) | The same main skill as one file, to upload in the Claude app |
 
 ## The project structure you will build
 
@@ -117,3 +118,52 @@ docker compose exec laravel php artisan rtr:demo
 ```
 
 Open http://localhost:5173 and log in with phone `010000001`, password `Demo1234` (owner).
+
+## Add the skill to Claude
+
+Choose **one** of these ways.
+
+### A. Claude Code plugin (recommended: one command, easy updates)
+Type this inside Claude Code:
+```
+/plugin marketplace add idgg22026/learn-build-RTR-G2
+/plugin install rtr-fullstack-builder@learn-build-rtr-g2
+```
+Or, from a terminal:
+```bash
+claude plugin marketplace add idgg22026/learn-build-RTR-G2
+claude plugin install rtr-fullstack-builder@learn-build-rtr-g2
+```
+To update later: `claude plugin marketplace update learn-build-rtr-g2`.
+
+> The repository is public, so this works on any computer with Claude Code.
+
+You then have these commands:
+
+| Command | What it does |
+|---|---|
+| `/rtr-fullstack-builder:new-project school-fees "fee manager for a school"` | Plans the roles, modules and data with you, then creates the Docker skeleton, `PLAN.md` and (if you agree) the two apps |
+| `/rtr-fullstack-builder:add-module Product products code:string name:string price:decimal` | Generates the 11 files of a CRUD module (API + Vue page + test), adapts the fields, adds the routes, and runs the test |
+| `/rtr-fullstack-builder:check-rules` | Reviews a project or module against the 13 RTR rules and lists what to fix |
+| *(automatic)* `fullstack-laravel-vue-builder` | Loads by itself when you say things like *"build a clinic app like RTR"* |
+
+### B. Copy the skills (no plugin system)
+```bash
+git clone https://github.com/idgg22026/learn-build-RTR-G2.git
+bash learn-build-RTR-G2/install.sh              # all projects (~/.claude/skills)
+bash learn-build-RTR-G2/install.sh --project    # only the current project (.claude/skills)
+```
+On Windows: `powershell -ExecutionPolicy Bypass -File learn-build-RTR-G2\install.ps1`.
+The commands are then `/new-project`, `/add-module` and `/check-rules`.
+
+### C. Claude app (claude.ai / desktop)
+Download [`dist/fullstack-laravel-vue-builder.zip`](dist/fullstack-laravel-vue-builder.zip), then go to
+**Settings → Capabilities → Skills → Upload skill**. Claude uses it when you ask it to plan or build a Laravel + Vue app.
+(The generator scripts need a computer with bash, so in the app Claude gives you the files and commands instead.)
+
+### The scripts on their own
+```bash
+bash plugin/skills/fullstack-laravel-vue-builder/scripts/new-project.sh my-app "My App" [--create]
+cd my-app && bash ../plugin/skills/fullstack-laravel-vue-builder/scripts/make-module.sh Product
+```
+Tested: a generated module passes its 3 feature tests in the RTR project, and its Vue page builds.
