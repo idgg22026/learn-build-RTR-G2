@@ -1,0 +1,46 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: cadt_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set it in .env}
+      MYSQL_DATABASE: rtr_room
+      MYSQL_USER: rtr_user
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set it in .env}
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: cadt_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on:
+      - mysql
+
+  laravel:
+    build: ./docker/laravel
+    container_name: cadt_laravel
+    volumes:
+      - ./laravel-app:/var/www/html
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      - mysql
+
+  vuejs:
+    build: ./docker/vuejs
+    container_name: cadt_vuejs
+    volumes:
+      - ./vuejs-app:/app
+    ports:
+      - "127.0.0.1:5173:5173"
+
+volumes:
+  mysql_data:

@@ -1,0 +1,67 @@
+# Runs the tests and a build on GitHub for every push, so a broken change shows a red mark at once.
+# Uses only test data (an empty SQLite database in memory); no secrets or tenant data are needed.
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  laravel:
+    name: Laravel tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: laravel-app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_sqlite, sqlite3, bcmath, intl, gd, zip
+          coverage: none
+
+      - name: Install packages
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Prepare .env
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Run tests
+        run: php artisan test
+
+      - name: Check packages for known security problems
+        run: composer audit
+        continue-on-error: true
+
+  vue:
+    name: Vue build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: vuejs-app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: vuejs-app/package-lock.json
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Check packages for known security problems
+        run: npm audit --audit-level=high
+        continue-on-error: true
