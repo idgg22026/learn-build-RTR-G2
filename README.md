@@ -20,7 +20,7 @@ Dockerised full-stack app.
 | [GUIDELINE.md](GUIDELINE.md) | The project analysed module by module: architecture, rules, and the main points to copy into your own projects |
 | [figma/](figma/) | The Figma UX/UI file (design system + screens) and a script to finish the prototype |
 | [plugin/](plugin/) | **Claude plugin `rtr-fullstack-builder`**: 4 skills and generator scripts to build your next project the same way ([how to install](#add-the-skill-to-claude)) |
-| [dist/fullstack-laravel-vue-builder.zip](dist/fullstack-laravel-vue-builder.zip) | The same main skill as one file, to upload in the Claude app |
+| [dist/fullstack-laravel-vue-builder.zip](https://github.com/idgg22026/learn-build-RTR-G2/raw/main/dist/fullstack-laravel-vue-builder.zip) (⬇ direct download) | The same main skill as one file, to upload in the Claude app |
 
 ## The project structure you will build
 
@@ -157,7 +157,7 @@ On Windows: `powershell -ExecutionPolicy Bypass -File learn-build-RTR-G2\install
 The commands are then `/new-project`, `/add-module` and `/check-rules`.
 
 ### C. Claude app (claude.ai / desktop)
-Download [`dist/fullstack-laravel-vue-builder.zip`](dist/fullstack-laravel-vue-builder.zip), then go to
+Download [**⬇ fullstack-laravel-vue-builder.zip**](https://github.com/idgg22026/learn-build-RTR-G2/raw/main/dist/fullstack-laravel-vue-builder.zip) (direct download), then go to
 **Settings → Capabilities → Skills → Upload skill**. Claude uses it when you ask it to plan or build a Laravel + Vue app.
 (The generator scripts need a computer with bash, so in the app Claude gives you the files and commands instead.)
 
